@@ -102,8 +102,7 @@ class Joke extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            liked: "",
-            jokes: []
+            liked: ""
         };
         this.like = this.like.bind(this);
         this.serverRequest = this.serverRequest.bind(this);
@@ -118,9 +117,13 @@ class Joke extends React.Component {
             "http://localhost:3000/api/jokes/like/" + joke.id,
             { like: 1 },
             res => {
+                /*console.log(5);
+                console.log("oldRes...", this.props.joke)
                 console.log("res... ", res);
-                this.setState({ liked: "Liked!", jokes: res });
-                this.props.jokes = res;
+                this.props.joke = res;
+                console.log("res... ", this.props.joke);
+                this.props.key = 1111111;*/
+                //this.setState({ liked: "Liked!" });
             }
         );
     }

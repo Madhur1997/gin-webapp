@@ -49,27 +49,20 @@ var jwtMiddleWare *jwtmiddleware.JWTMiddleware
 func main() {
 	jwtMiddleware := jwtmiddleware.New(jwtmiddleware.Options{
 		ValidationKeyGetter: func(token *jwt.Token) (interface{}, error) {
-			aud := os.Getenv("AUTH0_API_AUDIENCE")
-			log.Println(token.Claims.(jwt.MapClaims)["aud"].(string))
-			checkAudience := token.Claims.(jwt.MapClaims).VerifyAudience(aud, false)
 
-			if !checkAudience {
-				return token, errors.New("Invalid Audience")
-			}
-			log.Print(1)
 			iss := os.Getenv("AUTH0_DOMAIN")
 			checkIss := token.Claims.(jwt.MapClaims).VerifyIssuer(iss, false)
 			if !checkIss {
 				return token, errors.New("Invalid Issuer")
 			}
-			log.Print(2)
+
 			cert, err := getPemCert(token)
 			if err != nil {
 				log.Fatalf("could not get cert: %+v", err)
 			}
 
 			result, _ := jwt.ParseRSAPublicKeyFromPEM([]byte(cert))
-			log.Print(3)
+
 			return result, nil
 		},
 		SigningMethod: jwt.SigningMethodRS256,
