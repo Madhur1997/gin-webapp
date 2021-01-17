@@ -178,7 +178,7 @@ class LoggedIn extends React.Component {
             <div className="container">
                 <div className="col-lg-12">
                     <br />
-                    <span className="pull-right"> <a onClick={this.logout}>Log Out</a></span>
+                    <span className="pull-right"> <button className="btn btn-default" onClick={this.logout}>Log Out</button></span>
                     <h2>Jokeish</h2>
                     <p>Let's feed you with some funny Jokes!!!</p>
                     <div className="row">
