@@ -43,7 +43,14 @@ class App extends React.Component {
             }
         })
     }
-    setState() {
+    constructor(props) {
+        super(props)
+        this.state = {}
+        this.setup()
+        this.parseHash()
+        this.setLogin()
+    }
+    setLogin() {
         let idToken = localStorage.getItem("id_token")
         console.log(idToken)
         if (idToken) {
@@ -51,11 +58,6 @@ class App extends React.Component {
         } else {
             this.loggedIn = false
         }
-    }
-    componentWillMount() {
-        this.setup()
-        this.parseHash()
-        this.setState()
     }
     render() {
         if (this.loggedIn) {
@@ -87,7 +89,7 @@ class Home extends React.Component {
             <div className="container">
                 <div className="row">
                     <div className="col-xs-8 col-xs-offset-2 jumbotron text-center">
-                        <h1>Joekish</h1>
+                        <h1>Jokeish</h1>
                         <p>A load of Dad jokes XD</p>
                         <p>Sign in to get access </p>
                         <a onClick={this.authenticate} className="btn btn-primary btn-lg btn-login btn-block">Sign In</a>
@@ -155,6 +157,7 @@ class LoggedIn extends React.Component {
         this.logout = this.logout.bind(this)
     }
     logout() {
+        console.log(5)
         localStorage.removeItem("id_token")
         localStorage.removeItem("access_token")
         localStorage.removeItem("profile")
